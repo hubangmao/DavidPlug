@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
@@ -6,6 +6,7 @@ android {
 
 
     defaultConfig {
+        applicationId "com.hbm.code.plugapplication"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -23,20 +24,15 @@ android {
     }
 
 }
-/*构建为Jar包 gradlew makeJar*/
-task makeJar(type: Copy) {
-    delete 'build/libs/pluglibrary.jar' //删除已经存在的jar包
-    from('build/intermediates/bundles/release/')//从该目录下加载要打包的文件
-    into('build/libs/')//jar包的保存目录
-    include('classes.jar')
-    rename('classes.jar', 'pluglibrary.jar')
-}
-makeJar.dependsOn(build)
 
 dependencies {
-    compileOnly fileTree(include: ['*.jar'], dir: 'libs')
-    compileOnly 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //provided 不加入打包
+    provided files('libs/pluglibrary.aar')
+
 }

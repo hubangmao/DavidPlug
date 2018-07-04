@@ -1,6 +1,7 @@
 package com.hbm.code.mainapplication;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 
@@ -22,6 +23,7 @@ public class PlugManager {
     private Context mContext;
     private DexClassLoader mDexClassLoader;
     private Resources mResources;
+    public String mEntryActivityName;
 
     public static PlugManager getInstance() {
         return ourInstance;
@@ -39,7 +41,7 @@ public class PlugManager {
     public PlugManager initApk(String path) {
 
         //加载Dex
-        File dexOutFile = mContext.getDir("dex", Context.MODE_PRIVATE);
+        File dexOutFile = mContext.getDir("dex1", Context.MODE_PRIVATE);
         mDexClassLoader = new DexClassLoader(path, dexOutFile.getAbsolutePath(), null, mContext.getClassLoader());
 
 
@@ -60,6 +62,9 @@ public class PlugManager {
             e.printStackTrace();
         }
 
+        //获取插件中第一个Activity
+        PackageManager packageManager = mContext.getPackageManager();
+        mEntryActivityName = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES).activities[0].name;
         return this;
     }
 

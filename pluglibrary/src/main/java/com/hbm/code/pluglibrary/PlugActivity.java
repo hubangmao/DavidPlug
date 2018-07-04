@@ -10,22 +10,23 @@ import android.view.MotionEvent;
  * CreateDate:2018年07月03日 16:53
  */
 public interface PlugActivity {
+    public String ACTION_CLASS_NAME = "className";
 
     void attach(Activity att);
 
-    void onProxyCreate(Bundle savedInstanceState);
+    void onCreate(Bundle savedInstanceState);
 
-    void onProxyStart();
+    void onStart();
 
-    void onProxyResume();
+    void onResume();
 
-    void onProxyPause();
+    void onPause();
 
-    void onProxyStop();
+    void onStop();
 
-    void onProxyDestroy();
+    void onDestroy();
 
-    void onProxyRestart();
+    void onRestart();
 
     boolean onTouchEvent(MotionEvent event);
 }

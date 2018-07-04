@@ -1,2 +1,2 @@
-include ':MainApplication', ':pluglibrary', ':PlugActivity'
+include ':MainApplication', ':pluglibrary', ':PlugApplication', ':testvirtualapk'
 
